@@ -1,0 +1,72 @@
+# Fastfile
+
+# Define lanes for different tasks
+
+platform :ios do
+
+  # Lane for building and deploying to TestFlight using API key
+  lane :deploy_to_testflight_api_key do
+    # You may want to include additional setup steps here
+
+    # Use the 'app_store_connect_api_key' action to set up API key authentication
+    app_store_connect_api_key(
+      key_id: $APP_STORE_CONNECT_API_KEY_KEY_ID,
+      issuer_id: $APP_STORE_CONNECT_API_KEY_ISSUER_ID,
+      key_filepath: "./AuthKey_7FCT32P47X.p8",
+      in_house: false, # Set to true if you're deploying to Apple Business Manager or Apple School Manager
+    )
+
+    # Build the iOS app
+    gym(
+      scheme: "Runner", # Replace with your Xcode scheme
+      export_method: "app-store",
+    )
+
+    # Upload the build to TestFlight
+    pilot(
+      skip_submission: true,
+    )
+  end
+
+  # Add other lanes as needed
+
+end
+
+
+# default_platform :ios
+
+# platform :ios do
+#   before_all do
+#     setup_circle_ci
+#   end
+
+#   lane :upload_testflight do
+#     # Other actions
+#     increment_build_number(
+#       build_number: latest_testflight_build_number(
+#         initial_build_number: 1,
+#         version: get_version_number(xcodeproj: "Runner.xcodeproj")
+#       ) + 1,
+#     )
+
+#     # Use the 'app_store_connect_api_key' action to set up API key authentication
+#     app_store_connect_api_key(
+#       key_id: $APP_STORE_CONNECT_API_KEY_KEY_ID,
+#       issuer_id: $APP_STORE_CONNECT_API_KEY_ISSUER_ID,
+#       key_filepath: "../AuthKey_7FCT32P47X.p8",
+#       in_house: false, # Set to true if you're deploying to Apple Business Manager or Apple School Manager
+#     )
+
+#     # app_store_connect_api_key
+#     match(type: "appstore")
+#     gym(scheme: "Runner")
+
+#     # Upload the binary to TestFlight and automatically publish
+#     # to the configured beta testing group
+
+#     # Use the 'pilot' action to upload the app to TestFlight
+#     pilot
+
+#     # Other actions
+#   end
+# end

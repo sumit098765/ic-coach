@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "308165456521",
+    "project_id": "instacoach-coach-app",
+    "storage_bucket": "instacoach-coach-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:308165456521:android:ee0db2ea6fadc1d9d68c58",
+        "android_client_info": {
+          "package_name": "com.instacoach.Instacoach"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2i34IsnyvXfMmLHZopDQp0zx-MAk9ZS4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

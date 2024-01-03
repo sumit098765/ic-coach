@@ -1,0 +1,16 @@
+default_platform(:android)
+
+platform :android do
+  desc "Deploy a new internal testing release to the Play Store"
+  lane :deploy_internal do
+    # Define the path to the JSON key file directly
+    json_key_file_path = './key.json'    
+    gradle(task: "clean assembleRelease")
+    upload_to_play_store(
+      track: "internal",
+      apk: "../build/app/outputs/flutter-apk/app-release.apk",
+      json_key: json_key_file_path,
+      package_name: 'com.instacoach.Instacoach'
+    )
+  end
+end

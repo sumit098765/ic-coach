@@ -1,0 +1,207 @@
+version: 2.1
+
+orbs:
+  android: circleci/android@1.0.3
+  flutter: circleci/flutter@2.0.0
+
+commands:
+  custom_install_sdk:
+    description: |
+      Install Flutter SDK and Fastlane without doctor
+    parameters:
+      install-location:
+        default: ~/usr/development
+        description: Install path for the Flutter and Fastlane binaries.
+        type: string
+      version:
+        default: 3.16.0
+        description: The target version for the Flutter SDK.
+        type: string
+    steps:
+      - restore_cache:
+          keys:
+            - flutter-<<parameters.version>>-{{ arch }}
+
+      - run:
+          name: Install Flutter SDK if it does not exist
+          command: |
+            INSTALL_LOCATION=$(eval "echo $ORB_EVAL_INSTALL_LOCATION")
+
+            if [ ! -d "$INSTALL_LOCATION/flutter" ]; then
+              mkdir -p "$INSTALL_LOCATION"
+              if [ "$(uname)" == 'Darwin' ]; then
+                curl -o flutter_sdk.zip https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_$ORB_VAL_FLUTTER_SDK_VERSION-stable.zip
+                unzip -qq flutter_sdk.zip -d "$INSTALL_LOCATION"
+                rm flutter_sdk.zip
+              elif uname -a | grep -q "Linux" ; then
+                curl -o flutter_sdk.tar.xz https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_$ORB_VAL_FLUTTER_SDK_VERSION-stable.tar.xz
+                tar xf flutter_sdk.tar.xz -C "$INSTALL_LOCATION"
+                rm -f flutter_sdk.tar.xz
+              else
+                echo "This platform ($(uname -a)) is not supported."
+                exit 1
+              fi
+            fi
+
+            echo "export PATH=$INSTALL_LOCATION/flutter/bin:\$PATH" >> "$BASH_ENV"
+
+            # shellcheck source=/dev/null
+            source "$BASH_ENV"
+            which flutter
+
+          environment:
+            ORB_EVAL_INSTALL_LOCATION: <<parameters.install-location>>
+            ORB_VAL_FLUTTER_SDK_VERSION: <<parameters.version>>
+
+      - save_cache:
+          key: flutter-<<parameters.version>>-{{ arch }}
+          paths:
+            - <<parameters.install-location>>
+
+
+jobs:
+  build_android:
+    executor:
+      name: android/android-machine
+      resource-class: medium
+    
+    steps:
+      - checkout
+
+      - custom_install_sdk: 
+          version: 3.16.0
+
+      - flutter/install_pub:
+          cache-version: v1
+
+      - run:
+          name: Install Fastlane
+          command: |
+            gem install fastlane -NV
+
+      - run:
+          name: Install bundler
+          command: |
+            gem install bundler -v '< 3' && bundle install
+        
+      - run:
+          name: Flutter pub get
+          command: |
+            flutter pub get
+            dart pub get
+
+      # Other necessary steps for building Android
+
+      - run:
+          name: Bump Version
+          command: dart version_script.dart
+      # - run:
+      #     name: Generate Keystore
+      #     command: |
+      #       pwd
+      #       ls
+      #       keytool -genkeypair -v \
+      #         -keystore upload-keystore1.jks \
+      #         -keyalg RSA \
+      #         -keysize 2048 \
+      #         -validity 10000 \
+      #         -alias uploadkeystore1 \
+      #         -keypass andriod \
+      #         -storepass andriod \
+      #         -dname "CN=denny, OU=unit, O=camp, L=kas, S=lah, C=india"
+      #       ls
+   
+      # - run:
+      #     name: check the path
+      #     command: |
+      #       cd ./
+      #       pwd
+      #       ls
+      # - run:
+      #     name: Build APK
+      #     command: |
+      #       flutter build apk
+
+      # - store_artifacts:
+      #     path: build/app/outputs/flutter-apk/app-release.apk
+      
+      # - run:
+      #     name: Deploy to Play Store
+      #     command: |
+      #       cd android && fastlane deploy_internal
+      #     environment:
+      #       GOOGLE_PLAY_JSON_KEY: $GOOGLE_PLAY_JSON_KEY  # Store your JSON key as an environment variable
+
+workflows:
+  version: 2
+  build_android_ios:
+    jobs:
+      - build_android
+      # - build_ios
+         
+  # build-testflight-ios:
+  #   macos:
+  #     xcode: 15.0.0
+  #   steps:
+  #     - checkout
+  #     - custom_install_sdk: 
+  #         version: 3.16.0
+
+  #     - flutter/install_pub:
+  #         cache-version: v1
+
+      # - add_ssh_keys:
+      #   fingerprints:
+      #     - "1e:aa:ca:d0:51:51:c1:1b:e0:f1:b8:e2:31:b0:0d:f1"
+      # - run:
+      #     command: bundle install && pod install
+      #     working_directory: ios
+      # - run:
+      #     command: bundle exec fastlane beta
+      #     working_directory: ios
+
+  # build-adhoc-ios:
+  #   macos:
+  #     xcode: 15.0.0
+  #   steps:
+  #     - checkout
+  #     - custom_install_sdk: 
+  #         version: 3.16.0
+
+  #     - flutter/install_pub:
+  #         cache-version: v1
+  #     # - add_ssh_keys:
+  #     #   fingerprints:
+  #     #     - "1e:aa:ca:d0:51:51:c1:1b:e0:f1:b8:e2:31:b0:0d:f1"
+      
+  #     - run:
+  #         command: bundle install && pod install
+  #         working_directory: ios
+  #     - run:
+  #         command: bundle exec fastlane beta
+  #         working_directory: ios
+
+# workflows:
+#   version: 2
+#   build-app:
+#     jobs:
+      # - build-internal-testing-android:
+      #   filters:
+      #     branches:
+      #       only:
+      #         - main
+      # - build-adhoc-android
+      #   filters:
+      #     branches:
+      #       only:
+      #         - dev
+      # - build-testflight-ios
+          # filters:
+          #   branches:
+          #     only:
+          #       - main
+      # - build-adhoc-ios
+      #   filters:
+      #     branches:
+      #       only:
+      #         - dev

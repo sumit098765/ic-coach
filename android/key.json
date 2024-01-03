@@ -1,0 +1,13 @@
+{
+    "type": "service_account",
+    "project_id": "tidal-guild-377418",
+    "private_key_id": "214f885b67bca4e595ae4cf3bd658f55d438fa66",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDEVqADwAhyP7f0\nUqQRQql4rpgOfBKLn1WulEL3LkOMDFboW06k32wgBdNHqiYOLX1f2dTw3Dn/uDTz\nPkPwfqSMFBFXL+Xhqii+ONkoEiqTYnB+14+eFF3zDSrXijHLwOmORiJ2byBejkUc\nlQ9MnmdmZRWv/bQ1vR6oZQx/SFnTG02I8ZgtdcHXtYouQgyLsM1Gk1c93AQP0eFr\nKcwUUB7AlLHFP3+RzCDRGK79jHutcRNdSupvPwlSEQfepgQutB3LLXxB/p9ATmi6\nJvIal90LYWb+/vQbRIufbOTKJ+ecOTTVGvIwmDsYZLHJ3wYX81RFmF0UVXFqRhcj\nl/4RVERHAgMBAAECggEAFptrhl2vZfRXSp8qEWtjFyhyDWzqN8B2KF7ITSzluIkC\niB5cslhK228VnQaxphKagUBpp/2RAhRkUxkkJTDNN+yRneqVJi77zQIVDcD1vQ2/\nKqPIf35p3klxrurUgVkVANMA4dvkLBm79HwSDGj1j/vrYN3YyRKd0UGoDDnjpI59\nb3TnCH0US5ZXRvRheTizv4gx8xFJqzfHd5AVYQaP1/b+72wEuOA5ZUWNrUYSyPon\nygDvVCkcln+rS72ytof7towyiG840qsDWxJkuakLHlpYWSn8gE/I+3uWzCNumxaN\n6xxFJP3aopocuK78+2BnBJU5QBwynj2a0MJ7SbDarQKBgQD8LcyMAO3zCMb4FUwt\nsncvl8iiIagdIMETs7c5yII6HzPt1wnaKzb4+1VxcF72c9ZUyc30LhFdQY4wEGxt\ns6ASU9uo8hulU4e2f/PestpYmUTXnVI2SdYZvcXmSWzp5GJ5Sj0HfQA68Zrmn9qn\neWk7EsfwmhJTcuP6bn73q/135QKBgQDHUDiLDiiZsxNFMpRSsQ1vmvh0jeGh/k+R\npygKkl6HbXNe5RGHUDG8fJgERps5gPjr0JE4dfBOOb5HsQ+3GNlQLGllA2r0NOqh\n/GXG90EldHnoaRNvyYo4E4kwB9O2uYkFyr2FhLoiukzzpg4PjS9xxS3NCy8MckjA\nbRDhqTvwuwKBgEfIRaRIk3MNuY1eipurZE/Q1dSI3hDEhRE1o9832xHuVdrKzkwi\n5vgCmvS6dt2SZZ0nAJAUGO9BvNajpimn6tWstyclG4d4+nWRgHqQ0KRNpJH3fzJi\n3CXhphaCKhV95CYAYtTh2RHuOhiRwizP24tsMiujv7mvR4O+tjeL5o+dAoGBAMEw\nNY47LAlGdOA2lWPNb2uE91vqBhDBchiIwBv3IZ787L3HJIVWqs66qZJDacOECkJw\nB8KFNmZsO847hjL/5+t5ELMza+DGxcI65d/D2yZVzrAB4TASVmHiNbATdhd/oJu3\nlpmrO8vbbikgBDL4s0sAR1Oeinzy7Sduz9Ua9xlvAoGAHeYAUY7eYgsG9fe9TraD\nWJZphUyCKalPDWAixtpgG37/zXCOESgqJw3n8ApFNdcT+Zwbq+PNGscpQlGuX9mc\n1xB1U58jL0OFUW3+w97NprUoP37zw7QLpU9CnwOqR0lvyVorHzNvtgHb3Eiw0U4F\nU6c4eFv1HiqGHEu3WUunp2w=\n-----END PRIVATE KEY-----\n",
+    "client_email": "google-play@tidal-guild-377418.iam.gserviceaccount.com",
+    "client_id": "114250415887057814337",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/google-play%40tidal-guild-377418.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+  }

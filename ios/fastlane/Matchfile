@@ -1,0 +1,8 @@
+git_url("https://github.com/sumit09876/ic-coach.git")
+
+storage_mode("git")
+
+type("release")
+
+app_identifier(["com.instacoach.coachmanage.release", "com.instacoach.coachmanage"])
+username("J6Q6Y9VYC4@icloud.com")
