@@ -3,7 +3,7 @@ name: Bump Version and Commit
 on:
   push:
     branches:
-      - mai
+      - main
 
 jobs:
   bump-version:
@@ -16,7 +16,7 @@ jobs:
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.10.4'  # Replace with your desired Flutter version
+        flutter-version: '3.16.0'  # Replace with your desired Flutter version
 
     - name: Bump Version
       run: |
@@ -27,7 +27,7 @@ jobs:
         minor=${version_segments[1]}
         patch=${version_segments[2]}
 
-        # Determine version increment type from commit messages
+      # Determine version increment type from commit messages
         commit_message=$(git log -1 --pretty=%B)
         if echo "$commit_message" | grep -qi "major"; then
           new_version="$((major + 1)).0.0"
@@ -49,8 +49,8 @@ jobs:
        echo "Updating local pubspec"
         git checkout main
         git branch -a
-        git config --local user.email "cvaruncv1998@gmail.com"
-        git config --local user.name "cv-arun"
+        git config --local user.email "sumit.lal007@gmail.com"
+        git config --local user.name "sumit113"
         git add pubspec.yaml
         git commit -m "Bump version to $NEW_VERSION"
         git push -u origin main
