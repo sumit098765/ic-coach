@@ -27,7 +27,7 @@ jobs:
         minor=${version_segments[1]}
         patch=${version_segments[2]}
 
-      # Determine version increment type from commit messages
+        # Determine version increment type from commit messages
         commit_message=$(git log -1 --pretty=%B)
         if echo "$commit_message" | grep -qi "major"; then
           new_version="$((major + 1)).0.0"
@@ -46,11 +46,11 @@ jobs:
 
     - name: Commit Version Bump
       run: |
-       echo "Updating local pubspec"
+        echo "Updating local pubspec"
         git checkout main
         git branch -a
         git config --local user.email "sumit.lal007@gmail.com"
         git config --local user.name "sumit113"
         git add pubspec.yaml
-        git commit -m "Bump version to $NEW_VERSION"
+        git commit -m "Bump version to $new_version"
         git push -u origin main
