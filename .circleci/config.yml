@@ -120,7 +120,7 @@ jobs:
             git branch -a
             git config --local user.email "sumitsep19@gmail.com"
             git config --local user.name "sumit098765"
-            git add pubspec.yaml
+            git add .
             git commit -m "Bump version to $new_version"
             git push -u origin main
 
